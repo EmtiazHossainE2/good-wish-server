@@ -31,13 +31,23 @@ async function run() {
             const services = await cursor.toArray()
             res.send(services)
         })
-        // get single service details 
+
+        //9 get single service details 
         app.get('/service/:id' , async(req,res) => {
             const id = req.params.id 
             const query = {_id:ObjectId(id)}
             const service = await serviceCollection.findOne(query)
             res.send(service)
         })
+
+        //10 add new service (POST) CRUD ==> C create 
+        app.post('/service' , async(req,res) => {
+            const service = req.body 
+            const result = await serviceCollection.insertOne(service)
+            res.send(result)
+        })
+
+        
 
     } 
     finally {
@@ -50,7 +60,7 @@ run().catch(console.dir);
 
 //2
 app.get('/', (req, res) => {
-    res.send('Good wish server runinig ')
+    res.send('Good wish server running ')
 })
 app.listen(port, () => {
     console.log('good wish is running ', port);
