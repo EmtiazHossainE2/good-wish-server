@@ -68,7 +68,7 @@ async function run() {
 
         // load donation (get Create)
         app.get('/donation' , async(req,res) => {
-            const email = req.query.email
+            const email = req.query.email ;
             const query = {email : email} 
             const cursor = donationCollection.find(query)
             const donations = await cursor.toArray()
