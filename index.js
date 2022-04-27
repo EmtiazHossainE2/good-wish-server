@@ -23,6 +23,7 @@ async function run() {
         //7 
         await client.connect();
         const serviceCollection = client.db("volunteer").collection("service");
+        const donationCollection = client.db("volunteer").collection("donation");
 
         // 8 get
         app.get('/service' , async(req,res) => {
@@ -54,6 +55,26 @@ async function run() {
             const result = await serviceCollection.deleteOne(query)
             res.send(result)
         })
+
+        //12
+
+        //13 donation 
+        // get donation (post api)
+        app.post('/donation' , async(req,res) => {
+            const donation = req.body 
+            const result = await donationCollection.insertOne(donation)
+            res.send(result)
+        })
+
+        // load donation (get Create)
+        app.get('/donation' , async(req,res) => {
+            const email = req.query.email
+            const query = {email : email} 
+            const cursor = donationCollection.find(query)
+            const donations = await cursor.toArray()
+            res.send(donations)
+        })
+
 
 
     } 
