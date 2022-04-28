@@ -56,7 +56,24 @@ async function run() {
             res.send(result)
         })
 
-        //12
+        //12 update 
+        app.put('/service/:id', async (req, res) => {
+            const id = req.params.id
+            const updatedCause = req.body
+            const filter = { _id: ObjectId(id) }
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: {
+                    title: updatedCause.title,
+                    date : updatedCause.date,
+                    description : updatedCause.description,
+                    img : updatedCause.img
+                },
+            };
+            const result = await serviceCollection.updateOne(filter, updateDoc, options);
+            console.log(result);
+
+        })
 
         //13 donation 
         // get donation (post api)

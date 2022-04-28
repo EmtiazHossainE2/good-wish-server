@@ -20,7 +20,7 @@
  * ------------------------
  * 1. Make changes
  * 2. make sure you: git add . git commit. git push
- * 3. git push heroku main
+ * 3. git push heroku main/ git push -f heroku main
  * ---------------------
  * Connect Server with Client and deploy client
  * -------------------------
